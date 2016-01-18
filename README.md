@@ -62,7 +62,7 @@ depend on all the available benchmarks.
 ## Basic usage
 
 The `operf-macro` benchmark will install an executable named
-`macrorun`. This is the single entry-point to the framework and all
+`operf-macro`. This is the single entry-point to the framework and all
 functionality derives from it. It is a CLI program, using
 [cmdliner](http://erratique.ch/software/cmdliner). You can therefore
 easily obtain help on the possible commands directly through it. We
@@ -71,7 +71,7 @@ give here only some tips to begin.
 ### Listing available benchmarks
 
 ```
-$ macrorun list "4.01*"
+$ operf-macro list "4.01*"
 ```
 
 where `[glob]*` is any number of arguments that will be treated as a
@@ -82,7 +82,7 @@ by "4.01" will be listed on screen.
 ### Running benchmarks
 
 ```
-$ macrorun run
+$ operf-macro run
 ```
 
 This will run all benchmarks installed in the OPAM switch you are
@@ -92,8 +92,8 @@ program during execution: successfully executed benchmarks' results
 will be saved. Alternatively, you can use either
 
 ```
-$ macrorun run [bench_names_glob]*
-$ macrorun run --skip [bench_names_glob]*
+$ operf-macro run [bench_names_glob]*
+$ operf-macro run --skip [bench_names_glob]*
 ```
 
 to run only a selection of benchmarks. It will include (resp. exclude)
@@ -103,10 +103,10 @@ the selected benchmarks and only those.
 
 #### Raw data
 
-`macrorun` stores its results in `~/.cache/operf/macro`. Here you will
+`operf-macro` stores its results in `~/.cache/operf/macro`. Here you will
 find one directory per benchmark, and inside, one `.result` file per
 compiler. Inside the file you will find a *s-expression* that is the
-serialized version of `macrorun`'s `Result` value. This includes mostly
+serialized version of `operf-macro`'s `Result` value. This includes mostly
 the individual measurements per execution, such as real time, cycles,
 and so on.
 
@@ -115,10 +115,10 @@ and so on.
 Use:
 
 ```
-$ macrorun summarize
+$ operf-macro summarize
 ```
 
-This will print a dump of the database of all `macrorun`'s results, as
+This will print a dump of the database of all `operf-macro`'s results, as
 an s-expression, on your screen, but before that, it will create a
 `.summary` file for each `.result` file (see previous section) found
 in `~/.cache/operf/macro`, in the same directory.
@@ -126,7 +126,7 @@ in `~/.cache/operf/macro`, in the same directory.
 #### Result as `.csv` files to feed your favourite plotting program
 
 ```
-$ macrorun summarize -b csv -t <topic> [-s compiler1,...,compilerN] [benchmark1 ... benchmarkN]
+$ operf-macro summarize -b csv -t <topic> [-s compiler1,...,compilerN] [benchmark1 ... benchmarkN]
 ```
 
 This will print a CSV array of requested benchmarks (or all benchmarks
@@ -152,7 +152,7 @@ the `-o` argument to export the gnuplot `.gnu` file.
 Use:
 
 ```
-$ macrorun perf /path/to/exe arg1 .. argn --batch
+$ operf-macro perf /path/to/exe arg1 .. argn --batch
 ```
 
 This will perform a benchmark of the program specified in the
@@ -198,7 +198,7 @@ Benchmark descriptions must be stored in files with the extension
   the benchmark, if needed.
 
 - `env` is an optional list of environment parameters. If empty, the
-  environment will be the same as the one in effect when `macrorun`
+  environment will be the same as the one in effect when `operf-macro`
   was run. It should be of the form `["VAR1=v1";"VAR2=v2"; ...]`
   similar to the `Unix.execve` function.
 
@@ -216,17 +216,17 @@ Benchmark descriptions must be stored in files with the extension
   parameter is used when computing global performance indices for a
   compiler, including several or all benchmarks.
 
-- `discard` can be specified to indicate to `macrorun` that it should
+- `discard` can be specified to indicate to `operf-macro` that it should
   not save the output of the program. Usually, the output of the
   program is stored in the `.result` files for ulterior examination.
 
-- `topics` is a list of hints for `macrorun` to know which
+- `topics` is a list of hints for `operf-macro` to know which
   measurements should be done. This field is deprecated and should not
   be used.
 
 ## FAQ
 
-### I want `macrorun` to measure GC stats for my program!
+### I want `operf-macro` to measure GC stats for my program!
 
 Please add at the end of your benchmark:
 
